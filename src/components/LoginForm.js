@@ -98,8 +98,8 @@ const mapStateToProps = ({auth}) => {
 
 const styles = {
   imageCIStyle:{
-    height: 120,
-    width: 120,
+    height: 130,
+    width: 130,
     flex: 0,
     marginBottom: 10,
     alignSelf: 'flex-start'
@@ -115,7 +115,8 @@ const styles = {
     justifyContent: 'space-between',
 		alignItems: 'center',
 		marginLeft: 10,
-		marginRight: 10
+		marginRight: 10,
+    paddingTop: 10
   },
   loginStyle:{
     justifyContent: 'center',

@@ -6,6 +6,11 @@ import reducers from './reducers';
 import firebase from 'firebase';
 import LoginForm from './components/LoginForm'
 import Router from './Router';
+import { ApolloProvider } from 'react-apollo';
+import { ApolloClient } from 'apollo-client';
+import { HttpLink } from 'apollo-link-http';
+import { InMemoryCache } from 'apollo-cache-inmemory';
+import { networkInterface } from './config';
 
 class App extends Component {
   componentDidMount() {
@@ -28,7 +33,7 @@ class App extends Component {
     const store=createStore(reducers, {}, applyMiddleware(ReduxThunk));
     return(
       <Provider store={store}>
-        <Router/>
+          <Router/>
       </Provider>
     );
   }
