@@ -4,13 +4,17 @@ import {createStore, applyMiddleware} from 'redux';
 import ReduxThunk from 'redux-thunk';
 import reducers from './reducers';
 import firebase from 'firebase';
-import LoginForm from './components/LoginForm'
 import Router from './Router';
-import { ApolloProvider } from 'react-apollo';
-import { ApolloClient } from 'apollo-client';
-import { HttpLink } from 'apollo-link-http';
-import { InMemoryCache } from 'apollo-cache-inmemory';
-import { networkInterface } from './config';
+import ApolloClient from 'apollo-client';
+import {ApolloProvider} from 'react-apollo';
+import {HttpLink} from 'apollo-link-http';
+import {InMemoryCache} from 'apollo-cache-inmemory';
+import {networkInterface} from './config';
+
+const client = new ApolloClient({
+  link: new HttpLink ({uri: networkInterface}),
+  cache: new InMemoryCache()
+})
 
 class App extends Component {
   componentDidMount() {
@@ -29,11 +33,14 @@ class App extends Component {
     }
   }
 
+
   render () {
     const store=createStore(reducers, {}, applyMiddleware(ReduxThunk));
     return(
       <Provider store={store}>
+        <ApolloProvider client={client}>
           <Router/>
+        </ApolloProvider>
       </Provider>
     );
   }
